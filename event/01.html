@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interactive Web</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <style>
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      .characters {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: #fff000;
+      }
+      .ilbuni {
+        width: 100px;
+        cursor: pointer;
+      }
+      .characters .ilbuni {
+        display: inline-block;
+      }
+      .special {
+        border: 10px dashed red;
+      }
+    </style>
+
+    <!-- 외부 스트립트 파일 로드 시 -->
+    <!-- defer 옵션은 DOMContentLoaded 직전에 발생하는 것으로 html dom이 어느 정도 나타난 뒤에 실행되는 것! 그러므로 head 태그에 써도 작동을 한다.  -->
+    <!-- <script defer src="ex.js"></script> -->
+
+    <!-- defer와 같이 비동기적으로 처리되지만 defer와 다르게 html이 로드 및 파싱된 후에 된다는 보장이 없다. 그냥 다운로드가 다 되는 시점에 실행, html 컨텐츠와 독립적인 플러그인 다운 시 사용 -->
+    <!-- <script async src="ex.js"></script> -->
+  </head>
+  <body>
+    <div class="characters">
+      <div class="ilbuni a">
+        <img src="images/ilbuni_0.png" alt="일분이" />
+      </div>
+      <div class="ilbuni b">
+        <img src="images/ilbuni_1.png" alt="일분이" />
+      </div>
+      <div class="ilbuni c">
+        <img src="images/ilbuni_2.png" alt="일분이" />
+      </div>
+      <div class="ilbuni d">
+        <img src="images/ilbuni_3.png" alt="일분이" />
+      </div>
+    </div>
+
+    <script>
+      // 함수 레벨을 설정하여 전역 변수로 쓰이지 않도록 함. 나중에 파일이 섞일 때 변수가 섞일 수 있다.
+      // 함수 레벨을 설정해도 되지만, var가 아니므로 그냥 {} 블록 레벨 스코프로 해도 된다.
+      //   (function () {
+      {
+        const ilbuni = document.querySelector(".ilbuni.c");
+        const characters = document.querySelector(".characters");
+
+        function clickIlbuniHandler() {
+          ilbuni.classList.toggle("special");
+        }
+
+        function clickHandler(e) {
+          console.log(this);
+          console.log(e.currentTarget);
+          console.log(e.target);
+        }
+
+        ilbuni.addEventListener("click", clickIlbuniHandler);
+        characters.addEventListener("click", clickHandler);
+      }
+      //   })();
+    </script>
+  </body>
+</html>
